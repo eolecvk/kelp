@@ -14,12 +14,17 @@ Check out the configuration reference at https://huggingface.co/docs/hub/spaces-
 
 Setup and run:
 ```
+# Setup git lfs
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get install git-lfs
+git lfs install
+
+# Setup and run demo
 git clone https://github.com/eolecvk/kelp.git
 cd kelp
 python3 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
 python3 -m pip install -r requirements.txt
-wget https://huggingface.co/spaces/liam-jemison/kelp/resolve/main/yolov4-eggs_best.weights
 serve run demo:app
 ```
