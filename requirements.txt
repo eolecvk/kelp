@@ -1,3 +1,7 @@
+--extra-index-url https://download.pytorch.org/whl/cu116
+torch==1.12.1+cu116
 opencv-python
 pandas
 numpy
+gradio==3.5
+ray[serve]

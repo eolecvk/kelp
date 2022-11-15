@@ -1,10 +1,9 @@
 import gradio as gr
+from ray.serve.gradio_integrations import GradioServer
 from models import yolo
 from cv2 import  rectangle, putText, FONT_HERSHEY_SIMPLEX, applyColorMap, COLORMAP_HSV
 import numpy as np
-
-
-
+import torch
 
 with open("eggs.names") as f:
     classes = f.read().split("\n")
@@ -32,4 +31,4 @@ def greet(name):
     return "Hello " + name + "!!"
 
 iface = gr.Interface(classify, gr.Image(shape=(896, 684)), "image", examples = ["ex1.jpg", "ex2.jpg", "ex3.jpg", "ex4.jpg"])
-iface.launch()
+app = GradioServer.options(num_replicas=torch.cuda.device_count(), ray_actor_options={"num_gpus" : 1.0}).bind(iface)
